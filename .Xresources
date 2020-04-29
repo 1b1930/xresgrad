@@ -1,0 +1,62 @@
+URxvt.geometry:             90x30
+URxvt.internalBorder:       3
+URxvt.lineSpace:            0
+URxvt*scrollBar: false
+urxvt*depth: 32
+!urxvt*background: rgba:1200/1400/2000/dede
+URxvt*font: xft:tamzen:pixelsize=14
+
+! special
+*.foreground:   #daba8b
+*.background:   #191716
+*.cursorColor:  #daba8b
+
+! black
+*.color0:       #2c2926
+*.color8:       #726866
+
+! red
+*.color1:       #8a5738
+*.color9:       #91524c
+
+! green
+*.color2:       #636144
+*.color10:      #908b77
+
+! yellow
+*.color3:       #a4813f
+*.color11:      #d2bd98
+
+! blue
+*.color4:       #4c4f5a
+*.color12:      #6d829a
+
+! magenta
+*.color5:       #684e4e
+*.color13:      #7f6650
+
+! cyan
+*.color6:       #68745d
+*.color14:      #778767
+
+! white
+*.color7:       #a89166
+*.color15:      #c2a269
+
+
+
+
+
+
+
+
+
+!! extra gradient
+*.color16:		#dab88b
+*.color17:		#caac81
+*.color18:		#b79c75
+*.color19:		#9f8865
+*.color20:		#8d785a
+
+
+
