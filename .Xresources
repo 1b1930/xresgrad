@@ -63,14 +63,17 @@ URxvt*font: xft:tamzen:pixelsize=14
 
 
 
+
+
+
 ! GRADIENTS
-*.grad0:	#dae19b
-*.grad1:	#db08ab
-*.grad2:	#db2fbb
-*.grad3:	#db56cb
-*.grad4:	#db7ddb
-*.grad5:	#dba4eb
-*.grad6:	#dbcbfb
-*.grad7:	#dbf30b
-*.grad8:	#dc1a1b
-*.grad9:	#dc412b
+*.grad0:	#daba8b
+*.grad1:	#dbbb8c
+*.grad2:	#dcbc8d
+*.grad3:	#ddbd8e
+*.grad4:	#debe8f
+*.grad5:	#dfbf90
+*.grad6:	#e0c091
+*.grad7:	#e1c192
+*.grad8:	#e2c293
+*.grad9:	#e3c394

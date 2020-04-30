@@ -1,4 +1,6 @@
 import sys, os, fileinput
+from colorsys import rgb_to_hls, hls_to_rgb
+from webcolors import rgb_to_hex, hex_to_rgb
 
 # string that will be deleted from line extracted from xresources
 # necessary to extract correct hex value
@@ -6,7 +8,7 @@ fgdel = "*.foreground:"
 bgdel = "*.background:"
 
 # xresources path, will change for release
-xpath = ".Xresources"
+xpath = "/home/daniel/.Xresources"
 
 # maps argument variables to cmd arguments
 arg1 = sys.argv[1]
@@ -24,7 +26,7 @@ valid_args = [ "-bg", "-fg" ]
 if arg1 not in valid_args:
     print("ERROR: Invalid color argument")
     exit(1)
-elif arg2 < 0 or arg2 > 30000:
+elif arg2 < -30000 or arg2 > 30000:
     print("ERROR: Invalid offset range")
     exit(1)
 elif arg3 not in ["add", "sub"]:
@@ -63,6 +65,7 @@ def get_hex(fpath, color):
 
 
 # takes a color (in hex!), it's offset (how much to add or subtract from it) and a operator (str: "add" or "sub")
+
 def do_gradient(hexcolor, offset, opr):
     if opr == "add":
         i = int(hexcolor, 16)
@@ -112,6 +115,32 @@ def delete_multiple_lines(original_file, line_numbers):
 
 ## main function, kindof
 
+
+#rgbt = hex_to_rgb('#' + get_hex(xpath, grad_color))
+#print(rgbt)
+
+
+
+
+def color_variant(hex_color, brightness_offset):
+    # """ takes a color like #87c95f and produces a lighter or darker variant """
+    if len(hex_color) != 7:
+        raise Exception("Passed %s into color_variant(), needs to be in #87c95f format." % hex_color)
+    rgb_hex = [hex_color[x:x+2] for x in [1, 3, 5]]
+    new_rgb_int = [int(hex_value, 16) + brightness_offset for hex_value in rgb_hex]
+    new_rgb_int = [min([255, max([0, i])]) for i in new_rgb_int] # make sure new values are between 0 and 255
+    # hex() produces "0x88", we want just "88"
+    return "#" + "".join([hex(i)[2:] for i in new_rgb_int])
+
+
+
+
+
+
+
+
+
+
 # should put this shit inside a function
 counter = 0
 for line in fileinput.input(xpath, inplace=True):
@@ -128,8 +157,7 @@ with open(xpath, "a") as file1:
 
 for i in range(0,10):
     hexc = get_hex(xpath, grad_color)
-    hexc2 = do_gradient(hexc, arg2 * (i + 1), arg3)
-    hexc2 = hexc2.replace("0x", "#")
+    hexc2 = color_variant("#" + hexc, i * arg2)
     hexc_line = "*.grad" + str(i) + ":\t" + hexc2
     print(hexc_line)
     append_to_file(hexc_line, xpath)
