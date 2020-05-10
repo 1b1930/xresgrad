@@ -1,0 +1,16 @@
+1. ask user which color to make gradients of
+
+2. open xresources file
+
+3. extract color from line depending on user choice
+	3.1 make sure to support the same syntaxes the xresources file sypports
+
+4. function to calculate darker or lighter variant of the extracted hex color. this is gonna be a pain.
+	4.1 i should take this opportunity to learn some math aka the algorithm used to do this
+	4.2 i probably won't do that.
+
+5. for loop to create a increasingly darker or lighter variant of the colors
+	5.1 is there a way to do this without opening and closing the file every time? probably not
+
+6. remember to comment religiously so you can fix bugs later instead of writing it from scratch again you ffffffuck
+	

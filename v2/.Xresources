@@ -1,0 +1,84 @@
+URxvt.geometry:             90x30
+URxvt.internalBorder:       3
+URxvt.lineSpace:            0
+URxvt*scrollBar: false
+urxvt*depth: 32
+!urxvt*background: rgba:0000/0000/0000/aaaa
+URxvt*font: xft:misc tamsyn:bold:pixelsize=14
+
+
+! --- special colors ---
+
+*.background: #1d2643
+*.foreground: #bac2e0
+
+! --- standard colors ---
+
+! black
+*.color0: #1d2643
+
+! bright_black
+*.color8: #68708d
+
+! red
+*.color1: #ba80a9
+
+! bright_red
+*.color9: #c8b3d6
+
+! green
+*.color2: #83c29e
+
+! bright_green
+*.color10: #b0d0d1
+
+! yellow
+*.color3: #bab89e
+
+! bright_yellow
+*.color11: #c8cbd1
+
+! blue
+*.color4: #788ce0
+
+! bright_blue
+*.color12: #abb9ed
+
+! magenta
+*.color5: #b080e0
+
+! bright_magenta
+*.color13: #c3b3ed
+
+! cyan
+*.color6: #78c2d5
+
+! bright_cyan
+*.color14: #abd0e9
+
+! white
+*.color7: #bac2e0
+
+! bright_white
+*.color15: #d1daf7
+
+
+
+
+
+
+
+
+
+
+! GRADIENTS
+*.grad0:	#bac2e0
+*.grad1:	#aeb6d4
+*.grad2:	#a2aac8
+*.grad3:	#969ebc
+*.grad4:	#8a92b0
+*.grad5:	#7e86a4
+*.grad6:	#727a98
+*.grad7:	#666e8c
+*.grad8:	#5a6280
+*.grad9:	#4e5674
