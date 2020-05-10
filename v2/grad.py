@@ -4,32 +4,23 @@ xpath = '/home/daniel/project/python/xresgrad/v2/.Xresources'
 
 valid_colors = [ "*.foreground:", "*foreground:", "*.background:", "*background:" ]
 
-
-
-# What will it return?
-def verify(xpath, desired_color):
-    with open(xpath, 'r') as file:
-        for line in file:
-            if desired_color in line:
-                return True
-        return False
-
-
-
-#for i in range(0, len(valid_colors)):
-#    if verify(xpath, valid_colors[i]) == True:
-#        print("found index " + str(i))
-#    else:
-#        print("didn't find index " + str(i))
-#    ++i
-    
-def verify2(xpath, color_list):
-    if isinstance(color_list, list):
+def verify3(xpath, color):
+    if isinstance(color, str):
         with open(xpath, 'r') as file:
             for line in file:
-                for i in range(0, len(color_list)):
-                    if color_list[i] in line:
-                        print("found " + color_list[i])
-                    ++i
+                if color in line:
+                    return line
+    else:
+        print >> sys.stderr, "ERROR: COLOR VAR NOT STRING!"
 
-verify2(xpath, valid_colors)
+
+def extracthex(line, index):
+    line = line.replace(valid_colors[index], '')
+    line = line.replace('\t', '')
+    line = line.replace(' ', '')
+    line = line.replace('#', '')
+    line = line.replace('\n', '')
+    print(line)
+
+
+extracthex(verify3(xpath, valid_colors[0]), 0)
