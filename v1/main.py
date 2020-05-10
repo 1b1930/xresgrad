@@ -18,9 +18,6 @@ with open(xpath, 'r') as filetest:
             bgdel = bgdel.replace("*.", "*")
 
 
-# xresources path, will change for release
-
-
 # maps argument variables to cmd arguments
 arg1 = sys.argv[1]
 arg2 = sys.argv[2]
