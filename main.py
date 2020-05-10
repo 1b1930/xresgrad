@@ -2,18 +2,28 @@ import sys, os, fileinput
 from colorsys import rgb_to_hls, hls_to_rgb
 from webcolors import rgb_to_hex, hex_to_rgb
 
-# string that will be deleted from line extracted from xresources
-# necessary to extract correct hex value
+
+xpath = "/home/daniel/.Xresources"
+
 fgdel = "*.foreground:"
 bgdel = "*.background:"
 
+# string that will be deleted from line extracted from xresources
+# necessary to extract correct hex value
+
+with open(xpath, 'r') as filetest:
+    for line in filetest:
+        if fgdel or bgdel not in line:
+            fgdel = fgdel.replace("*.", "*")
+            bgdel = bgdel.replace("*.", "*")
+
+
 # xresources path, will change for release
-xpath = "/home/daniel/.Xresources"
+
 
 # maps argument variables to cmd arguments
 arg1 = sys.argv[1]
 arg2 = sys.argv[2]
-arg3 = sys.argv[3]
 
 # turns offset argument into an int (from str)
 # necessary for offset range error checking
@@ -28,9 +38,6 @@ if arg1 not in valid_args:
     exit(1)
 elif arg2 < -30000 or arg2 > 30000:
     print("ERROR: Invalid offset range")
-    exit(1)
-elif arg3 not in ["add", "sub"]:
-    print("ERROR: Invalid operator, valid operators: \"add\" and \"sub\"")
     exit(1)
 
 # Don't know if this needs to be here, but it gives me an error if i delete it so fuck it
@@ -61,7 +68,6 @@ def get_hex(fpath, color):
             line2 = line2.replace("\n", '')
             file1.close()
             return(line2)
-
 
 
 # takes a color (in hex!), it's offset (how much to add or subtract from it) and a operator (str: "add" or "sub")
