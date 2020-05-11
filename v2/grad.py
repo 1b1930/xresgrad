@@ -1,9 +1,9 @@
-import sys, fileinput, subprocess
+import sys, fileinput, subprocess, argparse
 
 xpath = '/home/daniel/.Xresources'
 
 valid_colors = [ "*.foreground:", "*foreground:", "*.background:", "*background:" ]
-valid_str_args = [ "-bg", "-fg" ]
+valid_str_args = [ "bg", "fg" ]
 rangestart = 0
 
 
@@ -64,13 +64,24 @@ for line in fileinput.input(xpath, inplace=True):
 
 # Checks if arguments given by the user are valid
 # I need to learn more about actual error handling, but for now this will do
-if sys.argv[1] not in valid_str_args:
-    print("ERROR: INVALID ARGUMENTS")
+
+# using argparse to better structure arguments
+# TODO: Integrate into main function
+
+parser = argparse.ArgumentParser(description='Calculates darker or lighter versions of fg or bg xresources color.')
+parser.add_argument('--base-color', '-c', type=str, default="fg", help='Color to use as base. DEFAULT: foreground', choices=['fg', 'bg'])
+parser.add_argument('--offset', '-o', type=int, default=-10, help='Color offset, higher numbers yield more disparity between gradient steps', nargs='?')
+args=parser.parse_args()
+
+if args.base_color not in valid_str_args:
+    print(args)
+    print("\nERROR: INVALID ARGUMENTS")
     sys.exit(1)
-elif sys.argv[1] == valid_str_args[0]:
+elif args.base_color == valid_str_args[0]:
     rangestart = 2
 else:
     rangestart = 0
+
 
 # Main function
 for i in range(rangestart, len(valid_colors)):
@@ -79,7 +90,7 @@ for i in range(rangestart, len(valid_colors)):
     else:
         chosen_line = extracthex(verify3(xpath, valid_colors[i]), i)
         for y in range(0,10):
-            shit = color_variant("#" + chosen_line, int(sys.argv[2]) * y)
+            shit = color_variant("#" + chosen_line, int(args.offset) * y)
             append1(xpath, shit, y)
             print(shit)
             ++y
