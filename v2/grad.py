@@ -44,10 +44,20 @@ def append1(xpath, line, times):
     with open(xpath, 'a') as file:
         file.write('*.grad' + str(times) + ':\t' + line + '\n')
 
+def appendargb(xpath, transparency):
+    with open(xpath, 'a') as file:
+        for i in range(2,3):
+            if not verify3(xpath, valid_colors[i]):
+                ++i
+            else:
+                hexbg = extracthex(verify3(xpath, valid_colors[i]), i)
+        file.write('*.backgroundpoly:\t' + '#' + transparency + hexbg)
 
 
 for line in fileinput.input(xpath, inplace=True):
     if "*.grad" in line:
+        continue
+    if "*.backgroundpoly" in line:
         continue
     print(line, end='')
 
@@ -73,6 +83,7 @@ for i in range(rangestart, len(valid_colors)):
             append1(xpath, shit, y)
             print(shit)
             ++y
+        appendargb(xpath, 'AA')
         subprocess.call([ './trimfile.sh' ])
         break
 
