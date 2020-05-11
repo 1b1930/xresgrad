@@ -4,8 +4,10 @@ xpath = '/home/daniel/project/python/xresgrad/v2/.Xresources'
 
 valid_colors = [ "*.foreground:", "*foreground:", "*.background:", "*background:" ]
 valid_str_args = [ "-bg", "-fg" ]
+rangestart = 0
 
 
+# Verifies and, if a line is found, returns that line with the specified color
 def verify3(xpath, color):
     if isinstance(color, str):
         with open(xpath, 'r') as file:
@@ -13,17 +15,16 @@ def verify3(xpath, color):
                 if color in line:
                     return line
     else:
-        print >> sys.stderr, "ERROR: COLOR VAR NOT STRING, YOU FUCKED UP SOMEWHERE!"
-        sys.exit(1)
+        return 1
 
-
+# simply takes a line and strips it so only the hex value is left, then returns that value
 def extracthex(line, index):
     line = line.replace(valid_colors[index], '')
     line = line.replace('\t', '')
     line = line.replace(' ', '')
     line = line.replace('#', '')
     line = line.replace('\n', '')
-    print(line)
+    return line
 
 
 # Lighten/Darken hex color function by Chase Seibert
@@ -38,12 +39,34 @@ def color_variant(hex_color, brightness_offset=1):
     return "#" + "".join([hex(i)[2:] for i in new_rgb_int])
 
 
+# Checks if arguments given by the user are valid
+# I need to learn more about actual error handling, but for now this will do
+if sys.argv[1] not in valid_str_args:
+    print("ERROR: INVALID ARGUMENTS")
+    sys.exit(1)
+elif sys.argv[1] == valid_str_args[0]:
+    rangestart = 2
+else:
+    rangestart = 0
 
-for i in range(1,2):
-    if sys.argv[i] not in valid_str_args:
-        print >> sys.stderr, "ERROR: INVALID ARGUMENT(S)"
-        sys.exit(1)
-    ++i
+# Main function
+for i in range(rangestart, len(valid_colors)):
+    if not verify3(xpath, valid_colors[i]):
+        ++i
+    else:
+        chosen_line = extracthex(verify3(xpath, valid_colors[i]), i)
+        for y in range(0,10):
+            shit = color_variant("#" + chosen_line, int(sys.argv[2]) * y)
+            print(shit)
+            ++y
+        break
+
+
+
+
+        
+
+
 
 
 
