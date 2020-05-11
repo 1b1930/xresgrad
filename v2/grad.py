@@ -1,6 +1,6 @@
 import sys, fileinput, subprocess
 
-xpath = '/home/daniel/project/python/xresgrad/v2/.Xresources'
+xpath = '/home/daniel/.Xresources'
 
 valid_colors = [ "*.foreground:", "*foreground:", "*.background:", "*background:" ]
 valid_str_args = [ "-bg", "-fg" ]
@@ -39,6 +39,7 @@ def color_variant(hex_color, brightness_offset=1):
     return "#" + "".join([hex(i)[2:] for i in new_rgb_int])
 
 
+# Appends lines to file, adds proper Xresources syntax
 def append1(xpath, line, times):
     with open(xpath, 'a') as file:
         file.write('*.grad' + str(times) + ':\t' + line + '\n')
@@ -72,6 +73,7 @@ for i in range(rangestart, len(valid_colors)):
             append1(xpath, shit, y)
             print(shit)
             ++y
+        subprocess.call([ './trimfile.sh' ])
         break
 
 

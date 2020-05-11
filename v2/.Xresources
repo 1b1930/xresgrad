@@ -61,6 +61,11 @@ URxvt*font: xft:misc tamsyn:bold:pixelsize=14
 ! bright_white
 *.color15: #d1daf7
 
+
+
+
+
+
 ! GRADIENTS
 *.grad0:	#bac2e0
 *.grad1:	#aeb6d4
