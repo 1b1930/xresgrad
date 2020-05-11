@@ -6,11 +6,10 @@ urxvt*depth: 32
 !urxvt*background: rgba:0000/0000/0000/aaaa
 URxvt*font: xft:misc tamsyn:bold:pixelsize=14
 
-
 ! --- special colors ---
 
-*.background: #1d2643
-*.foreground: #bac2e0
+*background: #1d2643
+*foreground: #bac2e0
 
 ! --- standard colors ---
 
@@ -61,15 +60,6 @@ URxvt*font: xft:misc tamsyn:bold:pixelsize=14
 
 ! bright_white
 *.color15: #d1daf7
-
-
-
-
-
-
-
-
-
 
 ! GRADIENTS
 *.grad0:	#bac2e0

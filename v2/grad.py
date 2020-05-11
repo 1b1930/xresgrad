@@ -1,4 +1,4 @@
-import sys
+import sys, fileinput, subprocess
 
 xpath = '/home/daniel/project/python/xresgrad/v2/.Xresources'
 
@@ -39,6 +39,18 @@ def color_variant(hex_color, brightness_offset=1):
     return "#" + "".join([hex(i)[2:] for i in new_rgb_int])
 
 
+def append1(xpath, line, times):
+    with open(xpath, 'a') as file:
+        file.write('*.grad' + str(times) + ':\t' + line + '\n')
+
+
+
+for line in fileinput.input(xpath, inplace=True):
+    if "*.grad" in line:
+        continue
+    print(line, end='')
+
+
 # Checks if arguments given by the user are valid
 # I need to learn more about actual error handling, but for now this will do
 if sys.argv[1] not in valid_str_args:
@@ -57,16 +69,9 @@ for i in range(rangestart, len(valid_colors)):
         chosen_line = extracthex(verify3(xpath, valid_colors[i]), i)
         for y in range(0,10):
             shit = color_variant("#" + chosen_line, int(sys.argv[2]) * y)
+            append1(xpath, shit, y)
             print(shit)
             ++y
         break
-
-
-
-
-        
-
-
-
 
 
