@@ -46,20 +46,15 @@ def append1(xpath, line, times):
 
 def appendargb(xpath, transparency):
     with open(xpath, 'a') as file:
-        for i in range(2,3):
-            if not verify3(xpath, valid_colors[i]):
-                ++i
-            else:
+        for i in range(2,4):
+            if verify3(xpath, valid_colors[i]):
                 hexbg = extracthex(verify3(xpath, valid_colors[i]), i)
-        file.write('*.backgroundpoly:\t' + '#' + transparency + hexbg)
+                file.write('*.backgroundpoly:\t' + '#' + transparency + hexbg)
+                break
+            else:
+                ++i
+                
 
-
-for line in fileinput.input(xpath, inplace=True):
-    if "*.grad" in line:
-        continue
-    if "*.backgroundpoly" in line:
-        continue
-    print(line, end='')
 
 
 # Checks if arguments given by the user are valid
@@ -83,6 +78,14 @@ else:
     rangestart = 0
 
 
+# delete previous gradient colors, if any
+for line in fileinput.input(xpath, inplace=True):
+    if "*.grad" in line:
+        continue
+    if "*.backgroundpoly" in line:
+        continue
+    print(line, end='')
+
 # Main function
 for i in range(rangestart, len(valid_colors)):
     if not verify3(xpath, valid_colors[i]):
@@ -94,7 +97,7 @@ for i in range(rangestart, len(valid_colors)):
             append1(xpath, shit, y)
             print(shit)
             ++y
-        appendargb(xpath, 'AA')
+        appendargb(xpath, 'aa')
         subprocess.call([ './trimfile.sh' ])
         break
 
